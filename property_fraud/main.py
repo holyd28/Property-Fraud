@@ -9,7 +9,7 @@ def main():
     try:
         print("Loading dataset...")
         # read file as a dataframe
-        df = pd.read_csv("data/kc_house_data.csv")
+        data = pd.read_csv("data/kc_house_data.csv")
         print("Dataset loaded successfully.")
         
     except Exception as e:
@@ -17,18 +17,18 @@ def main():
         return
     
     # create our metric for comparison (price per square foot) to ensure fairness
-    df["price_per_sqft"] = df["price"] / df["sqft_living"]
+    data["price_per_sqft"] = data["price"] / data["sqft_living"]
     
-    print(f"Running KNN Anomaly Detection on {len(df)} properties...")
+    print(f"Running KNN Anomaly Detection on {len(data)} properties...")
     
     # initialise detector 
     detector = AnomalyDetector(neighbours = 5)
     
     # obtain the updated dataframe with anomalies marked
-    result = detector.fit_predict(df)
+    result = detector.fit_predict(data)
     
     # isolate on anomalous properties
-    anomalies = result[result["is_anomaly"]== True]
+    anomalies = result[result["is_anomaly"] == True]
     
     print(f"Anomalous properties detected: {len(anomalies)}")
     
