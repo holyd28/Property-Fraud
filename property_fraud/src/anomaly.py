@@ -6,7 +6,7 @@ class AnomalyDetector:
     def __init__(self, neighbours = 5):
         # observe the 5 closest houses to check if property is an anomaly
         # use "ball_tree" algorithm which is optimised to find neighbours efficiently in spatial data
-        self.knn = NearestNeighbors(n_neighbors=neighbours,algorithm="ball_tree")
+        self.knn = NearestNeighbors(n_neighbors = neighbours,algorithm = "ball_tree")
         
     # to obtain the anomalous properties in the dataset
     def fit_predict(self,df):
